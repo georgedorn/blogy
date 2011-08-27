@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% for post in object_list %}
+    <article class="post">
+      <header class="postheader">
+        <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+        <p class="postinfo"><time>{{ post.pub_date }}</time> | 0 comments</p>
+      </header>
+        <p>{{ post.text|truncatewords:90 }} <a href="{{ post.get_absolute_url }}">Read More</a></p>
+    </article>
+  {% endfor %}
+{% endblock content %}

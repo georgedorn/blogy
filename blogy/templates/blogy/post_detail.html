@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load comments staticfiles markup %}
+
+{% block content %}
+{% get_comment_count for post as comment_count %}
+
+<article class="post">
+  <header>
+    <h3>{{ post.title }}</h3>
+    <p class="postinfo">
+      {% for tag in post.tags.all %}
+        {{ tag }}, 
+      {% endfor %}
+      <time>| {{ post.pub_date }}</time> | {{ comment_count }} comments
+    </p>
+  </header>
+  <section class="entry">
+    <p>{{ post.text }}</p>
+  </section>
+</article>
+
+<section id=comments">
+<h3>{{ comment_count }} comments:</h3>
+<div id="commentlist">
+  {% get_comment_list for post as comment_list %}
+  {% for comment in comment_list %}
+  <article class="entry">
+    <div class="avatar"> 
+      <img src="http://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=38">
+      <p class="author">
+        <span class="name">{% if comment.url %}<a href="{{ comment.url }}">{{ comment.name }}</a>{% else %}{{ comment.name }}{% endif %}</span>
+        <time class="date">{{ comment.submit_date }}</time>
+      </p>
+
+    </div>
+    <div class="comment">
+      <p>{{ comment.comment|restructuredtext }}</p>
+    </div>
+    <div class="clear"></div>
+  </article>
+  {% endfor %}
+</div>
+
+<h3 id="responsd">Leave a reply</h3>
+{% get_comment_form for post as comment_form %}
+<form action="{% comment_form_target %}" method="post" id="commentform">
+   {% csrf_token %}
+   {{ comment_form.content_type }}
+   {{ comment_form.object_pk }}
+   {{ comment_form.timestamp }}
+   {{ comment_form.security_hash }}
+   <p class="textfield">
+       <input name="name" id="id_name" value="" size="22" tabindex="1" type="text">
+          <label for="id_name">
+             <small>Name (required)</small>
+          </label>
+   </p>
+   <p class="textfield">
+       <input name="email" id="id_email" value="" size="22" tabindex="2" type="text">
+          <label for="id_email">
+              <small>Mail (will not be published, required)</small>
+          </label>
+   </p>
+   <p class="textfield">
+       <input name="url" id="id_url" value="" size="22" tabindex="3" type="text">
+          <label for="id_url">
+             <small>Website</small>
+          </label>
+   </p>
+<!--
+   <p>
+       <small><strong>XHTML:</strong> You can use these
+       tags:....</small>
+   </p>
+-->
+   <p class="text-area">
+       <textarea name="comment" id="id_comment" cols="50" rows="10" tabindex="4">
+       </textarea>
+   </p>
+   <p>
+       <input name="submit" id="submit" tabindex="5" type="image" src="{% static 'images/submit.png' %}">
+<!--       <input name="comment_post_ID" value="1" type="hidden">  -->
+   </p>
+   <div class="clear"></div>
+   <input type="hidden" name="next" value="{{ post.get_absolute_url }}" />
+</form>
+</section>
+
+{% endblock content %}

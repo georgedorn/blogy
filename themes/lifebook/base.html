@@ -1,0 +1,97 @@
+{% load staticfiles %}
+{% load url from future %}
+<!doctype html>
+
+<html>
+<head>
+<title>blog.apolloner.eu</title>
+<link href="{% url 'blogy:feed' %}" type="application/atom+xml" rel="alternate" title="ATOM Feed" />
+<link href="{% static 'style.css' %}" rel="stylesheet" type="text/css">
+
+
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!--[if IE 6]>
+<script src="js/belatedPNG.js"></script>
+<script>
+	DD_belatedPNG.fix('*');
+</script>
+<![endif]-->
+</head>
+
+<body>
+<section id="page">
+<div id="pagewrap">
+<section id="sidebar">
+<h2><a href="{% url 'blogy:index' %}">Home</a></h2>
+<h2>Categories</h2>
+<ul>
+  {% for tag in global_tags %}
+  <li><a href="{% url 'blogy:tag' tag=tag.slug %}">{{ tag.name }}</a></li>
+  {% endfor %}
+</ul>
+
+{% comment %}
+<h2>Blogroll</h2>
+<ul>
+<li><a href="#">Web Design</a></li>
+<li><a href="#">Graphics Design</a></li>
+<li><a href="#">Music</a></li>
+<li><a href="#">Movies</a></li>
+<li><a href="#">Entertainment</a></li>
+<li><a href="#">School</a></li>
+</ul>
+{% endcomment %}
+</section>
+<section id="contents">
+
+<header id="mainheader">
+
+<h1>blog<span>.apolloner.eu</span></h1>
+</header>
+
+
+<section id="main">
+
+{% block content %}{% endblock content %}
+
+</section>
+<footer id="pagefooter">
+<div class="footerwrap">
+<p class="siteinfo">
+
+<!--2010 &copy; All Rights Reserved | Your Website Info and copyright information goes here.-->
+</p>
+</div>
+<div id="credits">
+  <a href="http://cssheaven.org" title="download quality website templates">Free Website Template by CSS Heaven</a></div>
+
+
+</footer>
+</section>
+<!--
+<section id="social">
+<div id="socialwrap">
+
+<nav id="mainnav">
+<h2>Browse</h2>
+
+<ul>
+
+	<li class="current"><a href="index.html">Home</a></li>
+    <li><a href="page.html">About</a></i>
+    <li><a href="single.html">Styles</a></li>
+    <li><a href="contact.html">Contact</a></li>
+</ul>
+</nav>
+
+</section>
+-->
+<div class="clear"></div>
+
+</div>
+</section>
+
+</body>
+</html>
