@@ -19,12 +19,11 @@ class ContextMixin(object):
 
 
 class PostIndex(ContextMixin, ListView):
-    queryset = Post.published.order_by('-pub_date')
-
     def get_queryset(self):
-        qs = self.queryset
+        qs = Post.published.order_by('-pub_date')
         if 'tag' in self.kwargs:
             qs = qs.filter(tags__slug = self.kwargs['tag'])
+        qs = qs.all()
         return qs
 
 
