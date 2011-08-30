@@ -3,6 +3,7 @@ from django.utils.feedgenerator import Atom1Feed
 from django.views.generic.list import ListView
 from django.views.generic.dates import DateDetailView
 
+from django.contrib.comments.models import Comment
 from django.contrib.sites.models import Site
 from django.contrib.syndication.views import Feed
 
@@ -63,3 +64,30 @@ class PostFeed(Feed):
 
 
 feed = PostFeed()
+
+
+class CommentFeed(Feed):
+    feed_type = Atom1Feed
+
+    title = Site.objects.get_current().name
+    link = reverse_lazy('blogy:index')
+
+    def get_object(self, request, post=None):
+        if post:
+            return Post.objects.get(pk=post)
+
+    def items(self, obj):
+        if obj:
+            comments = Comment.objects.for_model(obj)
+        else:
+            comments = Comment.objects.all()
+        return comments.order_by('-submit_date')[:10]
+
+    def item_title(self, item):
+        return u'Comment from %s at %s' % (item.name, item.submit_date)
+
+    def item_description(self, item):
+        return item.comment
+
+
+comment_feed = CommentFeed()

@@ -18,7 +18,7 @@ class Post(models.Model):
     text = models.TextField()
 
     pub_date = models.DateTimeField()
-    last_updated = models.DateTimeField()
+    last_updated = models.DateTimeField(auto_now=True)
 
     public = models.BooleanField()
 

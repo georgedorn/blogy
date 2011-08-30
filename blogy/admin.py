@@ -8,8 +8,7 @@ class PostAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {'fields': (('title', 'slug'), 'text', 'tags')}),
-        ('Publishing options', {'fields': (('public', 'author'),
-                                    ('pub_date', 'last_updated'))})
+        ('Publishing options', {'fields': (('public', 'author', 'pub_date'),)})
     )
 
     list_display = ('title',)

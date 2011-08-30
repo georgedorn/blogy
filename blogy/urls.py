@@ -4,6 +4,9 @@ blogy_urlpatterns = patterns('blogy.views',
     url('^$', 'index', name='index'),
     url('^tag/(?P<tag>[\w-]+)/$', 'index', name='tag'),
 
+    url('^feed/comments/$', 'comment_feed', name='comment_feed'),
+    url('^feed/comments/(?P<post>\d+)/$', 'comment_feed', name='post_feed'),
+
     url('^feed/$', 'feed', name='feed'),
     url('^feed/(?P<tag>[\w-]+)/$', 'feed', name='tag_feed'),
 

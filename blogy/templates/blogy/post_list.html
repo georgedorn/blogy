@@ -1,12 +1,19 @@
 {% extends 'blogy/base.html' %}
-{% load markup_tags %}
+{% load comments markup_tags %}
+{% load url from future %}
+
+{% block extrahead %}
+  {{ block.super }}
+  <link href="{% url 'blogy:comment_feed' %}" type="application/atom+xml" rel="alternate" title="Comment Feed" />
+{% endblock extrahead %}
 
 {% block content %}
   {% for post in object_list %}
     <article class="post">
       <header class="postheader">
         <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
-        <p class="postinfo"><time>{{ post.pub_date }}</time> | 0 comments</p>
+        {% get_comment_count for post as comment_count %}
+        <p class="postinfo"><time>{{ post.pub_date }}</time> | {{ comment_count }} comments</p>
       </header>
         {{ post.text|apply_markup:'restructuredtext'|truncatewords_html:90 }} <a href="{{ post.get_absolute_url }}">Read More</a>
     </article>
