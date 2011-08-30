@@ -1,5 +1,5 @@
-{% extends 'base.html' %}
-{% load markup %}
+{% extends 'blogy/base.html' %}
+{% load markup_tags %}
 
 {% block content %}
   {% for post in object_list %}
@@ -8,7 +8,7 @@
         <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
         <p class="postinfo"><time>{{ post.pub_date }}</time> | 0 comments</p>
       </header>
-        {{ post.text|truncatewords:90|restructuredtext }} <a href="{{ post.get_absolute_url }}">Read More</a>
+        {{ post.text|apply_markup:'restructuredtext'|truncatewords_html:90 }} <a href="{{ post.get_absolute_url }}">Read More</a>
     </article>
   {% endfor %}
 {% endblock content %}

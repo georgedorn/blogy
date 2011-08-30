@@ -6,8 +6,8 @@
 <head>
 <title>Free CSS Template : Studio One</title>
 <link href="{% url 'blogy:feed' %}" type="application/atom+xml" rel="alternate" title="ATOM Feed" />
-<link href="{% static 'style.css' %}" rel="stylesheet" type="text/css">
-<link href="{% static 'styles/print/main.css' %}" rel="stylesheet" type="text/css" media="print">
+<link href="{% static 'style.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'styles/print/main.css' %}" rel="stylesheet" type="text/css" media="print" />
 <!--[if IE]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
@@ -17,7 +17,8 @@
 	DD_belatedPNG.fix('*');
 </script>
 <![endif]-->
-
+{% block extrahead %}
+{% endblock %}
 </head>
 
 <body>

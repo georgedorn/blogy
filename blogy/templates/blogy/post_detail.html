@@ -1,5 +1,5 @@
-{% extends 'base.html' %}
-{% load comments staticfiles markup %}
+{% extends 'blogy/base.html' %}
+{% load comments staticfiles markup_tags %}
 
 {% block content %}
 {% get_comment_count for post as comment_count %}
@@ -15,7 +15,7 @@
     </p>
   </header>
   <section class="entry">
-    {{ post.text|restructuredtext }}
+    {{ post.text|apply_markup:'restructuredtext' }}
   </section>
 </article>
 
@@ -34,7 +34,7 @@
 
     </div>
     <div class="comment">
-      <p>{{ comment.comment|restructuredtext }}</p>
+      <p>{{ comment.comment|apply_markup:'restructuredtext' }}</p>
     </div>
     <div class="clear"></div>
   </article>
