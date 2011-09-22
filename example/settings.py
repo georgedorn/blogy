@@ -1,13 +1,14 @@
-# Settings for example project
-
 import os, sys
-PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
-sys.path.insert(0, '..')
 
-DEBUG = True
+sys.path.insert(0, '..')
+from blogy.default_settings import *
+
+PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
+
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-THEME = 'lifebook'
+#THEME = 'lifebook'
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -26,10 +27,10 @@ DATABASES = {
     }
 }
 
-MARKITUP_FILTER = ('markitup.renderers.render_rest', {})
-MARKITUP_SET = 'markitup/sets/restructuredtext'
-MARKITUP_SKIN = 'markitup/skins/markitup'
-MARKITUP_AUTO_PREVIEW = True
+#MARKITUP_FILTER = ('markitup.renderers.render_rest', {})
+#MARKITUP_SET = 'markitup/sets/restructuredtext'
+#MARKITUP_SKIN = 'markitup/skins/markitup'
+#MARKITUP_AUTO_PREVIEW = True
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -116,21 +117,21 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, '..', 'themes', THEME),
 )
 
-INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.admin',
-    'django.contrib.admindocs',
-    'django.contrib.comments',
-    'django.contrib.markup',
-    'blogy',
-    'markitup',
-    'taggit',
-)
+#INSTALLED_APPS = (
+#    'django.contrib.auth',
+#    'django.contrib.contenttypes',
+#    'django.contrib.sessions',
+#    'django.contrib.sites',
+#    'django.contrib.messages',
+#    'django.contrib.staticfiles',
+#    'django.contrib.admin',
+#    'django.contrib.admindocs',
+#    'django.contrib.comments',
+#    'django.contrib.markup',
+#    'blogy',
+#    'markitup',
+#    'taggit',
+#)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
