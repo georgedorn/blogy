@@ -22,7 +22,7 @@ class PostAdmin(admin.ModelAdmin):
 
     class Media:
         css = {
-            'all': ('blogy/css/pygments_style.css', 'blogy/css/admin.css')
+            'all': ('blogy/css/admin.css',)
         }
 
 
