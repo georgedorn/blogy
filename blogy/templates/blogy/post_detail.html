@@ -1,5 +1,5 @@
 {% extends 'blogy/base.html' %}
-{% load comments staticfiles markup_tags %}
+{% load comments staticfiles markitup_tags %}
 {% load url from future %}
 
 {% block extrahead %}
@@ -21,7 +21,7 @@
     </p>
   </header>
   <section class="entry">
-    {{ post.text|apply_markup:'restructuredtext' }}
+    {{ post.text|render_markup|safe }}
   </section>
 </article>
 
@@ -40,7 +40,7 @@
 
     </div>
     <div class="comment">
-      <p>{{ comment.comment|apply_markup:'restructuredtext' }}</p>
+      <p>{{ comment.comment|render_markup|safe }}</p>
     </div>
     <div class="clear"></div>
   </article>

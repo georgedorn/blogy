@@ -1,5 +1,5 @@
 {% extends 'blogy/base.html' %}
-{% load comments markup_tags %}
+{% load comments markitup_tags %}
 {% load url from future %}
 
 {% block extrahead %}
@@ -15,7 +15,7 @@
         {% get_comment_count for post as comment_count %}
         <p class="postinfo"><time>{{ post.pub_date }}</time> | {{ comment_count }} comments</p>
       </header>
-        {{ post.text|apply_markup:'restructuredtext'|truncatewords_html:90 }} <a href="{{ post.get_absolute_url }}">Read More</a>
+        {{ post.text|render_markup|safe|truncatewords_html:90 }} <a href="{{ post.get_absolute_url }}">Read More</a>
     </article>
   {% endfor %}
 {% endblock content %}

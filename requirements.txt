@@ -1,5 +1,4 @@
 django-taggit
 docutils
 pygments
-django_markup
 django-markitup
