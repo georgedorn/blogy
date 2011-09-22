@@ -1,5 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 
+from .utils import rst_directive
+
 blogy_urlpatterns = patterns('blogy.views',
     url('^$', 'index', name='index'),
     url('^tag/(?P<tag>[\w-]+)/$', 'index', name='tag'),

@@ -26,6 +26,11 @@ DATABASES = {
     }
 }
 
+MARKITUP_FILTER = ('markitup.renderers.render_rest', {})
+MARKITUP_SET = 'markitup/sets/restructuredtext'
+MARKITUP_SKIN = 'markitup/skins/markitup'
+MARKITUP_AUTO_PREVIEW = True
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -123,6 +128,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'django.contrib.markup',
     'django_markup',
+    'markitup',
     'taggit',
     'blogy',
 )
