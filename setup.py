@@ -1,16 +1,49 @@
-from setuptools import setup, find_packages
+import os
+from distutils.core import setup
 
-setup(
-      name="Blogy",
-      version="0.1",
-      packages=find_packages(),
 
-      install_requires=['django-taggit',
-                        'django-markitup',
-                        'pygments',
-                        'docutils',
-                        ],
+def fullsplit(path, result=None):
+    """
+    Split a pathname into components (the opposite of os.path.join) in a
+    platform-neutral way.
+    """
+    if result is None:
+        result = []
+    head, tail = os.path.split(path)
+    if head == "":
+        return [tail] + result
+    if head == path:
+        return result
+    return fullsplit(head, [tail] + result)
 
-      include_package_data = True,
-      )
+
+package_dirs = ["blogy", 'themes']
+
+
+packages = []
+for package_dir in package_dirs:
+    for dirpath, dirnames, filenames in os.walk(package_dir):
+        # ignore dirnames that start with '.'
+        for i, dirname in enumerate(dirnames):
+            if dirname.startswith("."):
+                del dirnames[i]
+        if "__init__.py" in filenames:
+            packages.append(".".join(fullsplit(dirpath)))
+
+template_patterns = [
+    'templates/*.html',
+    'templates/*/*.html',
+    'templates/*/*/*.html',
+]
+
+package_data = dict(
+    (package_name, template_patterns)
+    for package_name in packages
+)
+
+setup(name='django-blogy',
+    version='0.1',
+    description='Blogy',
+    packages=packages,
+    package_data=package_data)
 
