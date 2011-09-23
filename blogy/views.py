@@ -1,4 +1,9 @@
-from django.core.urlresolvers import reverse_lazy
+try:
+    from django.core.urlresolvers import reverse_lazy
+except ImportError:
+    from django.core.urlresolvers import reverse
+    from django.utils.functional import memoize, lazy
+    reverse_lazy = lazy(reverse, str)
 from django.utils.feedgenerator import Atom1Feed
 from django.views.generic.list import ListView
 from django.views.generic.dates import DateDetailView
